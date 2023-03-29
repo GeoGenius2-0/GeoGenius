@@ -8,14 +8,14 @@ body {
     box-sizing: border-box
 }
 
-/* #logo {
+#logo {
     height: 3rem;
     width: auto;
 }
 
 #header {
     height: 15vh;
-} */
+}
 
 nav .navbar-nav .nav-link {
     margin-right: 2rem;
