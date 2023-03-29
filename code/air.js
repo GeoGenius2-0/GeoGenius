@@ -4,7 +4,7 @@ const longInp = document.querySelector("#longitude")
 const airQuality = document.querySelector(".air-quality")
 const airQualityStat = document.querySelector(".air-quality-status")
 const srchBtn = document.querySelector(".search-btn")
-const componentsEle = document.querySelectorAll(".component-val")
+// const componentsEle = document.querySelectorAll(".component-val")
 
 const appId = "f42bda7ce438693d1b9966abceb83f10" 
 const apiKey = '61380ea7a1e94e3a834965ee9dfac99f'
@@ -103,12 +103,16 @@ const setValuesOfAir = airData => {
 }
 
 const setComponentsOfAir = airData => {
-	let components = {...airData.list[0].components}
-	componentsEle.forEach(ele => {
-		const attr = ele.getAttribute('data-comp')
-		ele.innerText = components[attr] += " μg/m³"
-	})
-}
+  const components = airData.list[0].components;
+  const componentsEle = document.querySelectorAll('.component-val');
+  
+  componentsEle.forEach(ele => {
+    const attr = ele.getAttribute('data-comp');
+    const value = components[attr] + " μg/m³";
+    ele.textContent = value;
+  });
+};
+
 
 const onPositionGatherError = e => {
 	errorLabel.innerText = e.message

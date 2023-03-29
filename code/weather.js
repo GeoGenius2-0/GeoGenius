@@ -27,7 +27,7 @@ citiesAsShown.forEach((el) => {
 
 
 form.addEventListener('submit', (el) => {
-    if (searchInput.value.length === 0){
+    if (searchInput.value.length === 0) {
         alert('ADD A CITY MY GUY')
     } else {
         cityInput = searchInput.value
@@ -39,31 +39,25 @@ form.addEventListener('submit', (el) => {
     el.preventDefault();
 })
 
+function getMonth(month) {
+    const months = ["January", "February", "March","April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return months[month - 1];
+  }
 
-function dayOfWeek (day, month, year) {
+function dayOfWeek(day, month, year) {
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
      return weekday[new Date(`${year}-${month-1}-${day}`).getDay()];
-
-//      const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-// const date = new Date(`${year}-${month}-${day}`);
-// const formattedDate = date.toLocaleString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-// return formattedDate;
-
-    
-// const date = new Date(`${year}-${month-1}-${day}`);
-
-// const monthName = date.toLocaleString('default', { month: 'long' });
-// const weekdayName = weekday[date.getDay()];
-// const dayOfMonth = date.getDate();
-// return `${weekdayName}, ${monthName} ${dayOfMonth}`;
+    // const date = new Date(`${year}-${month-1}-${day}`);
+    // const formattedDate = date.toLocaleString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    // return formattedDate;
 }
 
 async function fetchWeatherData() {
     const url = `https://api.weatherapi.com/v1/current.json?key=f072ddef24d047afaae202017232803&q=${cityInput}&aqi=no`;
     try {
         const response = await fetch(url);
-		const data = await response.json();
-		console.log(data)
+        const data = await response.json();
+        console.log(data)
         temperature.innerHTML = data.current.temp_c + '&#176C';
         condition.innerHTML = data.current.condition.text;
         const date = data.location.localtime;
@@ -72,7 +66,7 @@ async function fetchWeatherData() {
         const d = Number(date.substring(8, 10));
         const time = date.substring(11);
 
-        dateShown.innerHTML = `${dayOfWeek(d, m, y)}, ${m} ${d} ${y}`;
+        dateShown.innerHTML = `${dayOfWeek(d, m, y)}, ${getMonth(m)} ${d}`;
         timeShown.innerHTML = time;
         nameShown.innerHTML = data.location.name;
         iconShown.src = data.current.condition.icon;
@@ -81,14 +75,14 @@ async function fetchWeatherData() {
         windShown.innerHTML = data.current.wind_kph + ' km/h';
 
         let timeOfDay = 'day';
-        
+
         const code = data.current.condition.code;
 
-        if(!data.current.is_day) {
+        if (!data.current.is_day) {
             timeOfDay = 'night';
         }
 
-        if(code == 1000) { 
+        if (code == 1000) {
             weatherApp.style.backgroundImage = `url('../images/day/sunny1.gif')`;//sunny
             submitButton.style.background = '#e5ba92';
             if (timeOfDay == 'night') {
@@ -106,7 +100,7 @@ async function fetchWeatherData() {
             code == 1276 ||
             code == 1279 ||
             code == 1282
-            
+
         ) {
             weatherApp.style.backgroundImage = `url('../images/day/cloudy.gif')`;//cloudy
             submitButton.style.background = '#fa6d1b';
@@ -114,23 +108,23 @@ async function fetchWeatherData() {
                 submitButton.style.background = '#181e27';
             }
         } else if (
-            code == 103 || code == 1069 || code == 1072 || code == 1150 || code == 1153 || code == 1180 || code == 1183 | code == 1186 || code == 1189 || code == 1192 ||code == 1195 || code == 1204 || code == 1207 || code == 1240 || code == 1243 || code == 1246 || code == 1249 || code == 1252
+            code == 103 || code == 1069 || code == 1072 || code == 1150 || code == 1153 || code == 1180 || code == 1183 | code == 1186 || code == 1189 || code == 1192 || code == 1195 || code == 1204 || code == 1207 || code == 1240 || code == 1243 || code == 1246 || code == 1249 || code == 1252
         ) {
             weatherApp.style.backgroundImage = `url('../images/day/rain.gif')`;//rainy
             submitButton.style.background = '#647675';
             if (timeOfDay == 'night') {
                 submitButton.style.background = '#325c80';
-            } 
+            }
         } else {
             weatherApp.style.backgroundImage = `url('../images/day/snow.gif')`;//snow
 
-                submitButton.style.background = '#4d72aa'
-                if (timeOfDay == 'night') {
-                    submitButton.style.background = '#1b1b1b'
-                }
+            submitButton.style.background = '#4d72aa'
+            if (timeOfDay == 'night') {
+                submitButton.style.background = '#1b1b1b'
             }
-            weatherApp.style.opacity = '1';
         }
+        weatherApp.style.opacity = '1';
+    }
     catch (error) {
         console.log(error)
         //alert('city cannot be found my boy')

@@ -18,6 +18,15 @@
     margin: 0 auto;
     padding: 24px;
   }
+
+  #logo {
+    height: 3rem;
+    width: auto;
+  }
+
+  #header {
+    height: 15vh;
+  }
   
 
   .heading {

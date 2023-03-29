@@ -1,5 +1,5 @@
 body {
-    margin : 0;
+    margin: 0;
     font-family: 'Rubik', sans-serif;
     background: #111
 }
@@ -8,21 +8,31 @@ body {
     box-sizing: border-box
 }
 
-nav .navbar-nav .nav-link {
-    margin-right: 2rem;
-  }
-  
-  #logo {
+/* #logo {
     height: 3rem;
     width: auto;
-  }
-  
-  #header {
-    height: 15vh;
-  }
+}
 
-h1, h3 {
-   font-weight: 400; 
+#header {
+    height: 15vh;
+} */
+
+nav .navbar-nav .nav-link {
+    margin-right: 2rem;
+}
+
+#logo {
+    height: 3rem;
+    width: auto;
+}
+
+#header {
+    height: 15vh;
+}
+
+h1,
+h3 {
+    font-weight: 400;
 }
 
 .weather-app {
@@ -32,7 +42,7 @@ h1, h3 {
     background-repeat: no-repeat;
     background-size: cover;
     color: #fff;
-    position:relative;
+    position: relative;
     transition: 500ms;
     opacity: 1;
 }
@@ -61,13 +71,15 @@ h1, h3 {
     padding: 2em 3em 4em 3em;
 }
 
-.container > div {
+.container>div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.city-time, .temp, .weather {
+.city-time,
+.temp,
+.weather {
     margin: 0 1em;
 }
 
@@ -95,9 +107,8 @@ h1, h3 {
     top: 0;
     right: 0;
     background: rgba(110, 110, 110, 0.25);
-    box-shadow: 
-    0 8px 32px 0
-    rgba(0, 0, 0, 0.3);
+    box-shadow:
+        0 8px 32px 0 rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -115,9 +126,9 @@ h1, h3 {
     top: 0;
     right: 0;
     padding: 1.5em;
-    margin:0;
+    margin: 0;
     border: none;
-    outline:none;
+    outline: none;
     color: #fff;
     cursor: pointer;
     font-size: 1.2em;
@@ -139,7 +150,7 @@ h1, h3 {
 }
 
 .search:focus {
-    outline : none;
+    outline: none;
 }
 
 .search::placeholder {
@@ -168,32 +179,34 @@ h1, h3 {
 }
 
 .city:hover {
-   color: #fff 
+    color: #fff
 }
 
 .details li {
     display: flex;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
 }
 
 /*RESPONSIVE*/
 
-@media screen and (max-width: 800px){
-    .panel, .container {
+@media screen and (max-width: 800px) {
+
+    .panel,
+    .container {
         position: relative;
         width: 100%;
         top: initial;
     }
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 500px) {
     html {
         font-size: 12px;
     }
 }
 
-@media screen and (max-width: 300px){
+@media screen and (max-width: 300px) {
     .weather-app {
         min-height: 40em;
     }
