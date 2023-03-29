@@ -17,6 +17,11 @@ nav .navbar-nav .nav-link {
 #header {
   height: 15vh;
 }
+
+#map {
+  height: 85vh;
+  width: 100vw;
+}
 /* 
 #signout-btn{
   box-sizing: border-box;
@@ -51,3 +56,11 @@ nav .navbar-nav .nav-link {
   text-decoration: inherit;
 }
  */
+
+.circle {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: blue;
+  /* z-index: 1; */
+}

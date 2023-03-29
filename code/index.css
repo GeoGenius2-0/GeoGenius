@@ -13,35 +13,14 @@ body {
     background-image: linear-gradient(to right top, #000000, #120f13, #181a21, #17262d, #183232);
 }
 
-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 30px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-header .logo {
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 1.3em;
-    text-transform: uppercase;
-}
 
-header ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+#logo {
+    height: 3rem;
+    width: auto;
+  }
 
-header ul li {
-    list-style: none;
-    margin-left: 20px;
-}
+
 
 i {
     padding-left: 20px;

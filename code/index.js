@@ -1,11 +1,13 @@
-const airQualityKey = 'f42bda7ce438693d1b9966abceb83f10'
+const airQualityKey = config.Air_Quality_API_KEY
+
+
 
 const sentences = [
-    "Unit-6 API Project",
-    "Hello, world!",
-    "Clean air FTW",
-    "#BreatheQualityAir",
-  ];
+  "Unit-6 API Project",
+  "Hello, world!",
+  "Clean air FTW",
+  "#BreatheQualityAir",
+];
 
   let intervalId;
   const typing = document.querySelector("#typing");
