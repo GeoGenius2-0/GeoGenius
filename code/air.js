@@ -6,8 +6,9 @@ const airQualityStat = document.querySelector(".air-quality-status")
 const srchBtn = document.querySelector(".search-btn")
 // const componentsEle = document.querySelectorAll(".component-val")
 
-const appId = "f42bda7ce438693d1b9966abceb83f10" 
-const apiKey = '61380ea7a1e94e3a834965ee9dfac99f'
+const appId = config.Air_Quality_API_KEY
+const apiKey = config.Geolocation_API_KEY
+console.log(appId, apiKey)
 
 const getUserLocation = () => {
     const location = locationInp.value;
@@ -118,7 +119,8 @@ const onPositionGatherError = e => {
 	errorLabel.innerText = e.message
 }
 
-srchBtn.addEventListener("click", () => {
+srchBtn.addEventListener("click", (e) => {
+  e.preventDefault();
     getUserLocation()
 })
 

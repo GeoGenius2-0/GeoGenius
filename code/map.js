@@ -1,11 +1,15 @@
-document.addEventListener("touchmove",(e) => {},{ passive: true });
-navigator.geolocation.watchPosition(position => {
-  localStorage.setItem('latitude', position.coords.latitude);
-  localStorage.setItem('longitude', position.coords.longitude);
+document.addEventListener("touchmove", (e) => {}, { passive: true });
+navigator.geolocation.watchPosition((position) => {
+  localStorage.setItem("latitude", position.coords.latitude);
+  localStorage.setItem("longitude", position.coords.longitude);
 });
 
-let userLatitude = Number(localStorage.getItem('latitude'));
-let userLongitude = Number(localStorage.getItem('longitude'));
+const weather_KEY = config.Weather_API_KEY;
+const airQuality_KEY = config.Air_Quality_API_KEY;
+console.log(weather_KEY, airQuality_KEY)
+
+let userLatitude = Number(localStorage.getItem("latitude"));
+let userLongitude = Number(localStorage.getItem("longitude"));
 let userClickedLatitude, userClickedLongitude;
 
 function initMap() {
@@ -17,16 +21,16 @@ function initMap() {
   const marker = new google.maps.Marker({
     position: { lat: userLatitude, lng: userLongitude },
     map: map,
-  })
+  });
 
   const circle = new google.maps.Marker({
     position: { lat: userLatitude, lng: userLongitude },
     map: map,
     icon: {
       path: google.maps.SymbolPath.CIRCLE,
-      fillColor: 'blue',
+      fillColor: "blue",
       fillOpacity: 0.7,
-      strokeColor: 'white',
+      strokeColor: "white",
       strokeWeight: 2,
       scale: 10,
     },
@@ -42,7 +46,7 @@ function initMap() {
 
   const infoWindow = new google.maps.InfoWindow({
     content: "<div>You're here!</div>",
-  })
+  });
 
   marker.addListener("click", () => {
     infoWindow.open(map, marker);
@@ -66,17 +70,14 @@ function initMap() {
 //   }
 // }
 
-
-
-
 async function userCurrLocWeather() {
-  const url = `https://api.weatherapi.com/v1/current.json?q=${userLatitude},${userLongitude}&key=245c1273ceb84fa58ad05454232203`;
+  const url = `https://api.weatherapi.com/v1/current.json?q=${userLatitude},${userLongitude}&key=${API_KEY}`;
   const response = await fetch(url);
   const data = response.json();
   console.log(data);
 }
 
-function createCircle (map, lat, lng, radius, color) {
+function createCircle(map, lat, lng, radius, color) {
   const circle = new google.maps.Circle({
     strokeColor: color,
     strokeOpacity: 0.8,
@@ -90,7 +91,6 @@ function createCircle (map, lat, lng, radius, color) {
   return circle;
 }
 
-
 async function fetchUsCapitals() {
   for (let i = 0; i < usCapitals.length; i++) {
     const capital = usCapitals[i];
@@ -101,9 +101,11 @@ async function fetchUsCapitals() {
         continue;
       }
       const data = await response.json();
-      console.log(data)
+      console.log(data);
     } catch (error) {
-      console.error(`Error fetching weather data for ${eachCity}: ${error.message}`);
+      console.error(
+        `Error fetching weather data for ${eachCity}: ${error.message}`
+      );
     }
   }
 }
@@ -121,19 +123,22 @@ async function fetchWorldCapitals() {
         continue;
       }
       const data = await response.json();
-      console.log(data)
+      console.log(data);
     } catch (error) {
-      console.error(`Error fetching weather data for ${eachCity}: ${error.message}`);
+      console.error(`${error.message}`);
     }
   }
 }
 
-// fetchWorldCapitals();
-function makeCircle() {
-  const divEl = document.createElement('div');
-  divEl.classList.add("circle")
-  divEl.style.backgroundColor = "pink"
-  return divEl;
-}
+fetchWorldCapitals();
 
-console.log(makeCircle());
+
+
+// function makeCircle() {
+//   const divEl = document.createElement("div");
+//   divEl.classList.add("circle");
+//   divEl.style.backgroundColor = "pink";
+//   return divEl;
+// }
+
+
