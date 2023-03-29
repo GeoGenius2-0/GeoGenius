@@ -13,13 +13,14 @@ body {
     background-image: linear-gradient(to right top, #000000, #120f13, #181a21, #17262d, #183232);
 }
 
-
+nav .navbar-nav .nav-link {
+    margin-right: 2rem;
+}
 
 #logo {
     height: 3rem;
     width: auto;
-  }
-
+}
 
 
 i {
@@ -35,8 +36,7 @@ header ul li a {
 }
 
 header ul li a:hover {
-    background: white;
-    color: yellow;
+    color: rgb(107, 248, 231)
 }
 
 section {
@@ -91,9 +91,6 @@ button:hover {
     color: inherit;
     text-decoration: inherit;
 }
-
-
-
 
 
 #typing {

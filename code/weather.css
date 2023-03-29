@@ -1,20 +1,19 @@
 body {
     margin: 0;
     font-family: 'Rubik', sans-serif;
-    background: #111
+    background-image: linear-gradient(to right top, #000000, #120f13, #181a21, #17262d, #183232);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 * {
     box-sizing: border-box
 }
 
-#logo {
-    height: 3rem;
-    width: auto;
-}
-
 #header {
     height: 15vh;
+    background-color: transparent;
 }
 
 nav .navbar-nav .nav-link {
@@ -26,9 +25,6 @@ nav .navbar-nav .nav-link {
     width: auto;
 }
 
-#header {
-    height: 15vh;
-}
 
 h1,
 h3 {
@@ -37,7 +33,6 @@ h3 {
 
 .weather-app {
     min-height: 100vh;
-    background-image: url();
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -58,7 +53,7 @@ h3 {
     z-index: 0;
 }
 
-.container {
+.container2 {
     position: absolute;
     top: 0;
     left: 0;
@@ -71,7 +66,7 @@ h3 {
     padding: 2em 3em 4em 3em;
 }
 
-.container>div {
+.container2>div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,7 +188,7 @@ h3 {
 @media screen and (max-width: 800px) {
 
     .panel,
-    .container {
+    .container2 {
         position: relative;
         width: 100%;
         top: initial;

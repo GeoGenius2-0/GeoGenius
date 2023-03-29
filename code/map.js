@@ -1,4 +1,5 @@
 document.addEventListener("touchmove", (e) => {}, { passive: true });
+
 navigator.geolocation.watchPosition((position) => {
   localStorage.setItem("latitude", position.coords.latitude);
   localStorage.setItem("longitude", position.coords.longitude);
@@ -6,7 +7,6 @@ navigator.geolocation.watchPosition((position) => {
 
 const weather_KEY = config.Weather_API_KEY;
 const airQuality_KEY = config.Air_Quality_API_KEY;
-console.log(weather_KEY, airQuality_KEY)
 
 let userLatitude = Number(localStorage.getItem("latitude"));
 let userLongitude = Number(localStorage.getItem("longitude"));
@@ -71,7 +71,7 @@ function initMap() {
 // }
 
 async function userCurrLocWeather() {
-  const url = `https://api.weatherapi.com/v1/current.json?q=${userLatitude},${userLongitude}&key=${API_KEY}`;
+  const url = `https://api.weatherapi.com/v1/current.json?q=${userLatitude},${userLongitude}&key=${weather_KEY}`;
   const response = await fetch(url);
   const data = response.json();
   console.log(data);
@@ -101,7 +101,6 @@ async function fetchUsCapitals() {
         continue;
       }
       const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error(
         `Error fetching weather data for ${eachCity}: ${error.message}`
@@ -109,28 +108,56 @@ async function fetchUsCapitals() {
     }
   }
 }
-// console.time("fetchWeather");
 // fetchWeather();
-// console.timeEnd("fetchWeather");
+const arr = []
+// async function fetchWorldCapitals() {
+//   for (let i = 0; i < usCapitals.length; i++) {
+//     const capital = usCapitals[i];
+//     const url = `https://api.weatherapi.com/v1/current.json?q=${capital}&key=245c1273ceb84fa58ad05454232203`;
+//     try {
+//       const response = await fetch(url);
+//       if (!response.ok) {
+//         continue;
+//       }
+//       const data = await response.json();
+//       const lat = data.location.lat;
+//       const lng = data.location.lon;
+//       const airQuality = await fetchAirQuality(lat, lng);
+//       arr.push(airQuality);
+//     } catch (error) {
+//       console.error(`${error.message}`);
+//     }
+//   }
+//   return arr;
+// }
 
-async function fetchWorldCapitals() {
-  for (let i = 0; i < countriesCapitals.length; i++) {
-    const capital = countriesCapitals[i];
-    const url = `https://api.weatherapi.com/v1/current.json?q=${capital}&key=245c1273ceb84fa58ad05454232203`;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        continue;
-      }
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(`${error.message}`);
-    }
+async function getCapitalCoordinates(city) {
+  try {
+    const url = `https://api.weatherapi.com/v1/current.json?q=${city}&key=${weather_KEY}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    return data.location;
+  } catch (error) {
+    console.error(error);
   }
 }
 
-fetchWorldCapitals();
+
+
+
+async function fetchAirQuality(lat, lng) {
+    const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lng}&appid=${airQuality_KEY}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data.list[0].main.aqi;
+    } catch (error) {
+      console.error(`${error.message}`);
+    }
+}
+
+
 
 
 
