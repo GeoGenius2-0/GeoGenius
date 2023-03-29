@@ -77,7 +77,7 @@ const sentences = [
           const response = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${long}&lon=${lat}&appid=${airQualityKey}`);
           const data = await response.json();
           console.log(data)
-          // console.log(data.list['0'].components)
+
         })
       }
     }
