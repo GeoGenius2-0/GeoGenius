@@ -1,4 +1,4 @@
-const airQualityKey = api.Air_Quality_API_KEY
+const airQualityKey = config.Air_Quality_API_KEY
 
 
 
