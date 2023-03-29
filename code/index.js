@@ -28,10 +28,10 @@ const sentences = [
               clearInterval(intervalId);
               startTyping();
             }
-          }, 100);
+          }, 50);
         }, 3000);
       }
-    }, 100);
+    }, 50);
   }
   
   startTyping();
