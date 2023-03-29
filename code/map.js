@@ -57,6 +57,8 @@ function initMap() {
     userClickedLongitude = e.latLng.lng();
     console.log(userClickedLatitude, userClickedLongitude);
   });
+
+
 }
 
 // function addMarker(map, coords) {
@@ -109,7 +111,6 @@ async function fetchUsCapitals() {
   }
 }
 // fetchWeather();
-const arr = []
 // async function fetchWorldCapitals() {
 //   for (let i = 0; i < usCapitals.length; i++) {
 //     const capital = usCapitals[i];
@@ -128,24 +129,35 @@ const arr = []
 //       console.error(`${error.message}`);
 //     }
 //   }
-//   return arr;
 // }
 
+
+// This function returns and object of the city coordinates including the weather data
 async function getCapitalCoordinates(city) {
   try {
     const url = `https://api.weatherapi.com/v1/current.json?q=${city}&key=${weather_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
-    return data.location;
+    return data;
   } catch (error) {
     console.error(error);
   }
 }
 
+// This function takes getCapitalCoordinates and returns the temperature of the city
+async function getCapitalWeather(city) {
+  const capital = await getCapitalCoordinates(city);
+  return capital.current.temp_c;
+}
 
+//This function takes getCapitalCoordinates and returns the air quality of the city
+async function getCapitalAirQuality(city) {
+  const capital = await getCapitalCoordinates(city);
+  const airQuality = await fetchAirQuality(capital.location.lat, capital.location.lon);
+  return airQuality;
+}
 
-
+// This function takes the latitude and longitude and returns the air quality of the city
 async function fetchAirQuality(lat, lng) {
     const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lng}&appid=${airQuality_KEY}`;
     try {
@@ -157,15 +169,23 @@ async function fetchAirQuality(lat, lng) {
     }
 }
 
+async function determineAQIColor(city) {
+  if (await getCapitalAirQuality(city) === 1) {
+    return "green";
+  } else if (await getCapitalAirQuality(city) === 2) {
+    return "yellow";
+  } else if (await getCapitalAirQuality(city) === 3) {
+    return "orange";
+  } else if (await getCapitalAirQuality(city) === 4) {
+    return "burgundy";
+  } else if (await getCapitalAirQuality(city) === 5) {
+    return "red";
+  }
+}
 
 
 
 
-// function makeCircle() {
-//   const divEl = document.createElement("div");
-//   divEl.classList.add("circle");
-//   divEl.style.backgroundColor = "pink";
-//   return divEl;
-// }
+
 
 
