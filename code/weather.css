@@ -1,6 +1,6 @@
 body {
     margin : 0;
-    font-family:'Courier New', Courier, monospace;
+    font-family: 'Rubik', sans-serif;
     background: #111
 }
 
@@ -8,13 +8,26 @@ body {
     box-sizing: border-box
 }
 
+nav .navbar-nav .nav-link {
+    margin-right: 2rem;
+  }
+  
+  #logo {
+    height: 3rem;
+    width: auto;
+  }
+  
+  #header {
+    height: 15vh;
+  }
+
 h1, h3 {
    font-weight: 400; 
 }
 
 .weather-app {
     min-height: 100vh;
-    background-image: url('../images/day/cloudy.jpg');
+    background-image: url();
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -123,4 +136,65 @@ h1, h3 {
     padding: 0 1em 0.5em 0;
     color: #fff;
     font-size: 1.1em;
+}
+
+.search:focus {
+    outline : none;
+}
+
+.search::placeholder {
+    color: #ccc
+}
+
+.panel ul {
+    padding: 0 0 1em 0;
+    margin: 2em 0;
+    border-bottom: 1px #ccc solid;
+}
+
+
+.panel ul li {
+    color: #ccc;
+    margin: 2.5em 0;
+}
+
+.panel ul h4 {
+    margin: 3em 0;
+}
+
+.city {
+    display: block;
+    cursor: pointer;
+}
+
+.city:hover {
+   color: #fff 
+}
+
+.details li {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+/*RESPONSIVE*/
+
+@media screen and (max-width: 800px){
+    .panel, .container {
+        position: relative;
+        width: 100%;
+        top: initial;
+    }
+}
+
+@media screen and (max-width: 500px){
+    html {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 300px){
+    .weather-app {
+        min-height: 40em;
+    }
 }

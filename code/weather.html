@@ -6,58 +6,94 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/de2e4cc8df.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="weather.css">
-    <title>Document</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="weather.css" />
 </head>
 
 <body>
-    <div class="weather-app">
-        <div class="container">
-            <h3 class="brand">Weather</h3>
-            <div>
-                <h1 class="temp">26&#176</h1>
-                <div class="city-time">
-                    <h1 class="name">London</h1>
-                    <small>
-                        <span class="time">0:00</span>
-                        -
-                        <span class="date"> Tuesday July 31</span>
-                    </small>
-                </div>
-                <div class="weather">
-                    <img id="img" />
-                    <span class="condition">rainy</span>
+    <!-- <header id="header">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
+            <div class="container">
+                <a class="navbar-brand" href="#"><img id="logo" src="../images/logo.png" alt="logo" srcset=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="mx-auto"></div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Map</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Weather</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Air Quality</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </nav>
+    </header> -->
+    <main>
+        <div class="weather-app">
+            <div class="container">
+                <h3 class="brand">Weather</h3>
+                <div>
+                    <h1 class="temp">26&#176C</h1>
+                    <div class="city-time">
+                        <h1 class="name">London</h1>
+                        <small>
+                            <span class="time">0:00</span>
+                            -
+                            <span class="date"> Tuesday July 31</span>
+                        </small>
+                    </div>
+                    <div class="weather">
+                        <img id="icon" />
+                        <span class="condition">rainy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <form action="" id="locationInput">
+                    <input type="text" class="search" placeholder="Search Location..." />
+                    <button type="submit" class="submit"> <i class="fas fa-search"></i></button>
+                </form>
+                <ul class="cities">
+                    <li class="city">KINGSTON</li>
+                    <li class="city">LONDON</li>
+                    <li class="city">CALIFORNIA</li>
+                    <li class="city">PARIS</li>
+                </ul>
+                <ul class="details">
+                    <h4>Weather Details</h4>
+                    <li>
+                        <span>Cloudy</span>
+                        <span class="cloud">90%</span>
+                    </li>
+                    <li>
+                        <span>Humidity</span>
+                        <span class="humidity">65%</span>
+                    </li>
+                    <li>
+                        <span>Wind</span>
+                        <span class="wind">Loading... Km/h</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="panel">
-            <form action="" id="locationInput">
-                <input type="text" class="search" placeholder="Search Location..." />
-                <button type="submit" class="submit"> <i class="fas fa-search"></i></button>
-            </form>
-            <ul class="cities">
-                <li class="city">NEW YORK</li>
-                <li class="city">lONDON</li>
-                <li class="city">CALIFORNIA</li>
-                <li class="city">PARIS</li>
-            </ul>
-            <ul class="details">
-                <h4>Weather Details</h4>
-                <li>
-                    <span>Cloudy</span>
-                    <span class="cloud">90%</span>
-                </li>
-                <li>
-                    <span>Humidity</span>
-                    <span class="humidity">65%</span>
-                </li>
-                <li>
-                    <span>Wind</span>
-                    <span class="wind">Loading... Km/h</span>
-                </li>
-            </ul>
-        </div>
-    </div>
+    </main>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script> -->
+    <script src="weather.js"></script>
 </body>
 
 </html>

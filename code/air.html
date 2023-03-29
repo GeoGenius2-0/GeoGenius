@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Air Pollution Indicator</title>
 	<link rel="stylesheet" href="air.css" />
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Montserrat:wght@700&family=Poppins&display=swap" rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Montserrat:wght@700&family=Poppins&display=swap"
+		rel="stylesheet">
 </head>
+
 <body>
 	<div class="root">
 		<h1 class="heading">Air Pollution Indicator</h1>
 		<div class="location-container">
 			<h2 class="sub-heading">Your Location :</h2>
 			<label for="error-msg"></label><br />
-			<input
-				type="number"
-				name="lat"
-				placeholder="Latitude"
-				id="latitude"
-				step="0.0001"
-				class="loc-input" />
-			
-			<input
-				type="number"
-				name="lon"
-				placeholder="Longitude"
-				id="longitude"
-				step="0.0001"
-				class="loc-input" />
+			<input type="number" name="lat" placeholder="Latitude" id="latitude" step="0.0001" class="loc-input" />
+			<input type="number" name="lon" placeholder="Longitude" id="longitude" step="0.0001" class="loc-input" />
+			<input type="text" id="location" name="location" placeholder="Enter location..." class="loc-input">
 			<button class="search-btn">Search</button>
 		</div>
 		<div class="air-info">
@@ -78,4 +70,5 @@
 	</div>
 	<script src="air.js"></script>
 </body>
+
 </html>
