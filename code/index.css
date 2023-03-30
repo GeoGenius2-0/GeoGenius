@@ -28,7 +28,7 @@ i {
     padding-right: 20px;
 }
 
-header ul li a {
+/* header ul li a {
     text-decoration: none;
     padding: 6px 20px;
     color: green;
@@ -37,7 +37,7 @@ header ul li a {
 
 header ul li a:hover {
     color: rgb(107, 248, 231)
-}
+} */
 
 section {
     display: flex;
@@ -148,3 +148,17 @@ button:hover {
       max-width: none;
     }
   }
+
+  .image-container {
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden; /* Hides any portion of images outside the container */
+    object-fit: cover; /* Sets the object-fit property */
+    margin-left: 110px;
+  }
+  
+ 
+  
+  
+
+  
