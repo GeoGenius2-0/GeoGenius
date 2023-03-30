@@ -1,55 +1,73 @@
 document.addEventListener("touchmove", (e) => {}, { passive: true });
 
-navigator.geolocation.watchPosition((position) => {
-  localStorage.setItem("latitude", position.coords.latitude);
-  localStorage.setItem("longitude", position.coords.longitude);
-});
-
 const weather_KEY = config.Weather_API_KEY;
 const airQuality_KEY = config.Air_Quality_API_KEY;
 
-let userLatitude = Number(localStorage.getItem("latitude"));
-let userLongitude = Number(localStorage.getItem("longitude"));
+let userLatitude = Number(localStorage.getItem("latitude")) || 40.6578084;
+let userLongitude = Number(localStorage.getItem("longitude")) || -74.0070693;
 let userClickedLatitude, userClickedLongitude;
 
-function initMap() {
+async function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 8,
+    zoom: 12,
     center: { lat: userLatitude, lng: userLongitude },
   });
 
-  capitals.forEach(async (capital) => {
-    try {
-      const usCapital = await getCapitalCoordinates(capital);
-      const circle = new google.maps.Marker({
-        position: { lat: usCapital.location.lat, lng: usCapital.location.lon },
-        map: map,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          fillColor: await determineAQIColor(capital),
-          fillOpacity: 1,
-          strokeColor: "white",
-          strokeWeight: 2,
-          scale: 10,
-        },
-      });
-      const capitalTemperature = await getCapitalWeather(capital);
-      const capitalAQI = await getCapitalAirQuality(capital);
-      const capitalName = await getCapitalCoordinates(capital);
-      const infoWindow = new google.maps.InfoWindow({
-        content: `<div id="map-text">Capital: ${capitalName.location.name}<br>Temperature: ${capitalTemperature}˚C <br>Air Quality Index: ${capitalAQI}</div>`,
-      });
-
-      // Listen for click events on the marker instance
-      circle.addListener("click", () => {
-        infoWindow.open(map, circle);
-      });
-    } catch (error) {
-      console.error(
-        `Error fetching weather data for ${capital}: ${error.message}`
-      );
-    }
+  const userCity = await userCurrCity(userLatitude, userLongitude);
+  const userTemp = await userCurrTemperature(userLatitude, userLongitude);
+  const userAQI = await fetchAirQuality(userLatitude, userLongitude);
+  const userColor = await determineAQIColor(userCity);
+  const userCircle = new google.maps.Marker({
+    position: { lat: userLatitude, lng: userLongitude },
+    map: map,
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+      fillColor: userColor,
+      fillOpacity: 1,
+      strokeColor: "white",
+      strokeWeight: 2,
+      scale: 10,
+    },
   });
+
+  const userMarker = new google.maps.Marker({
+    position: { lat: userLatitude, lng: userLongitude },
+    map: map,
+  });
+
+
+  // capitals.forEach(async (capital) => {
+  //   try {
+  //     const usCapital = await getCapitalCoordinates(capital);
+  //     const circle = new google.maps.Marker({
+  //       position: { lat: usCapital.location.lat, lng: usCapital.location.lon },
+  //       map: map,
+  //       icon: {
+  //         path: google.maps.SymbolPath.CIRCLE,
+  //         fillColor: await determineAQIColor(capital),
+  //         fillOpacity: 1,
+  //         strokeColor: "white",
+  //         strokeWeight: 2,
+  //         scale: 10,
+  //       },
+  //     });
+  //     const capitalTemperature = await getCapitalWeather(capital);
+  //     const capitalAQI = await getCapitalAirQuality(capital);
+  //     const capitalName = await getCapitalCoordinates(capital);
+  //     const infoWindow = new google.maps.InfoWindow({
+  //       content: `<div id="map-text">Capital: ${capitalName.location.name}<br>Temperature: ${capitalTemperature}˚C <br>Air Quality Index: ${capitalAQI}</div>`,
+  //     });
+
+  //     // Listen for click events on the marker instance
+  //     circle.addListener("click", () => {
+  //       infoWindow.open(map, circle);
+  //     });
+  //   } catch (error) {
+  //     console.error(
+  //       `Error fetching weather data for ${capital}: ${error.message}`
+  //     );
+  //   }
+  // });
 }
 
 // function addMarker(map, coords) {
@@ -62,13 +80,6 @@ function initMap() {
 //     marker.setIcon(coords.iconImage);
 //   }
 // }
-
-async function userCurrLocWeather() {
-  const url = `https://api.weatherapi.com/v1/current.json?q=${userLatitude},${userLongitude}&key=${weather_KEY}`;
-  const response = await fetch(url);
-  const data = response.json();
-  console.log(data);
-}
 
 function createCircle(map, lat, lng, radius, color) {
   const circle = new google.maps.Circle({
@@ -83,44 +94,6 @@ function createCircle(map, lat, lng, radius, color) {
   });
   return circle;
 }
-
-async function fetchUsCapitals() {
-  for (let i = 0; i < usCapitals.length; i++) {
-    const capital = usCapitals[i];
-    const url = `https://api.weatherapi.com/v1/current.json?q=${capital}&key=245c1273ceb84fa58ad05454232203`;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        continue;
-      }
-      const data = await response.json();
-    } catch (error) {
-      console.error(
-        `Error fetching weather data for ${eachCity}: ${error.message}`
-      );
-    }
-  }
-}
-// fetchWeather();
-// async function fetchWorldCapitals() {
-//   for (let i = 0; i < usCapitals.length; i++) {
-//     const capital = usCapitals[i];
-//     const url = `https://api.weatherapi.com/v1/current.json?q=${capital}&key=245c1273ceb84fa58ad05454232203`;
-//     try {
-//       const response = await fetch(url);
-//       if (!response.ok) {
-//         continue;
-//       }
-//       const data = await response.json();
-//       const lat = data.location.lat;
-//       const lng = data.location.lon;
-//       const airQuality = await fetchAirQuality(lat, lng);
-//       arr.push(airQuality);
-//     } catch (error) {
-//       console.error(`${error.message}`);
-//     }
-//   }
-// }
 
 // This function returns and object of the city coordinates including the weather data
 async function getCapitalCoordinates(city) {
@@ -170,8 +143,30 @@ async function determineAQIColor(city) {
   } else if ((await getCapitalAirQuality(city)) === 3) {
     return "orange";
   } else if ((await getCapitalAirQuality(city)) === 4) {
-    return "burgundy";
+    return "pink";
   } else if ((await getCapitalAirQuality(city)) === 5) {
     return "red";
+  }
+}
+
+async function userCurrTemperature(lat, lng) {
+  const url = `https://api.weatherapi.com/v1/current.json?q=${lat},${lng}&key=${weather_KEY}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.current.temp_c;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function userCurrCity(lat, lng) {
+  const url = `https://api.weatherapi.com/v1/current.json?q=${lat},${lng}&key=${weather_KEY}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.location.name;
+  } catch (error) {
+    console.error(error);
   }
 }
