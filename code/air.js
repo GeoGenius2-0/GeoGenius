@@ -71,7 +71,7 @@ const getAirQuality = async (lat, long) => {
 };
 
 const getLocation = async (lat, long) => {
-  const apiKey = "61380ea7a1e94e3a834965ee9dfac99f";
+  const apiKey = "c240e3c9fb5f3a6a787a659f81ffe2f1";
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${long}&key=${apiKey}`;
   const rawData = await fetch(url).catch((err) => {});
   const data = await rawData.json();

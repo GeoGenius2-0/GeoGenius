@@ -14,51 +14,42 @@ let userClickedLatitude, userClickedLongitude;
 
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 15,
+    zoom: 8,
     center: { lat: userLatitude, lng: userLongitude },
   });
 
-  const marker = new google.maps.Marker({
-    position: { lat: userLatitude, lng: userLongitude },
-    map: map,
+  capitals.forEach(async (capital) => {
+    try {
+      const usCapital = await getCapitalCoordinates(capital);
+      const circle = new google.maps.Marker({
+        position: { lat: usCapital.location.lat, lng: usCapital.location.lon },
+        map: map,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: await determineAQIColor(capital),
+          fillOpacity: 1,
+          strokeColor: "white",
+          strokeWeight: 2,
+          scale: 10,
+        },
+      });
+      const capitalTemperature = await getCapitalWeather(capital);
+      const capitalAQI = await getCapitalAirQuality(capital);
+      const capitalName = await getCapitalCoordinates(capital);
+      const infoWindow = new google.maps.InfoWindow({
+        content: `<div id="map-text">Capital: ${capitalName.location.name}<br>Temperature: ${capitalTemperature}˚C <br>Air Quality Index: ${capitalAQI}</div>`,
+      });
+
+      // Listen for click events on the marker instance
+      circle.addListener("click", () => {
+        infoWindow.open(map, circle);
+      });
+    } catch (error) {
+      console.error(
+        `Error fetching weather data for ${capital}: ${error.message}`
+      );
+    }
   });
-
-  const circle = new google.maps.Marker({
-    position: { lat: userLatitude, lng: userLongitude },
-    map: map,
-    icon: {
-      path: google.maps.SymbolPath.CIRCLE,
-      fillColor: "blue",
-      fillOpacity: 0.7,
-      strokeColor: "white",
-      strokeWeight: 2,
-      scale: 10,
-    },
-  });
-
-  const weatherInfo = new google.maps.InfoWindow({
-    content: "<div>Temperature: 50C<br>Air Quality: 4</div>",
-  });
-
-  circle.addListener("click", () => {
-    weatherInfo.open(map, circle);
-  });
-
-  const infoWindow = new google.maps.InfoWindow({
-    content: "<div>You're here!</div>",
-  });
-
-  marker.addListener("click", () => {
-    infoWindow.open(map, marker);
-  });
-
-  map.addListener("click", (e) => {
-    userClickedLatitude = e.latLng.lat();
-    userClickedLongitude = e.latLng.lng();
-    console.log(userClickedLatitude, userClickedLongitude);
-  });
-
-
 }
 
 // function addMarker(map, coords) {
@@ -131,7 +122,6 @@ async function fetchUsCapitals() {
 //   }
 // }
 
-
 // This function returns and object of the city coordinates including the weather data
 async function getCapitalCoordinates(city) {
   try {
@@ -153,39 +143,35 @@ async function getCapitalWeather(city) {
 //This function takes getCapitalCoordinates and returns the air quality of the city
 async function getCapitalAirQuality(city) {
   const capital = await getCapitalCoordinates(city);
-  const airQuality = await fetchAirQuality(capital.location.lat, capital.location.lon);
+  const airQuality = await fetchAirQuality(
+    capital.location.lat,
+    capital.location.lon
+  );
   return airQuality;
 }
 
 // This function takes the latitude and longitude and returns the air quality of the city
 async function fetchAirQuality(lat, lng) {
-    const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lng}&appid=${airQuality_KEY}`;
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      return data.list[0].main.aqi;
-    } catch (error) {
-      console.error(`${error.message}`);
-    }
-}
-
-async function determineAQIColor(city) {
-  if (await getCapitalAirQuality(city) === 1) {
-    return "green";
-  } else if (await getCapitalAirQuality(city) === 2) {
-    return "yellow";
-  } else if (await getCapitalAirQuality(city) === 3) {
-    return "orange";
-  } else if (await getCapitalAirQuality(city) === 4) {
-    return "burgundy";
-  } else if (await getCapitalAirQuality(city) === 5) {
-    return "red";
+  const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lng}&appid=${airQuality_KEY}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.list[0].main.aqi;
+  } catch (error) {
+    console.error(error);
   }
 }
 
-
-
-
-
-
-
+async function determineAQIColor(city) {
+  if ((await getCapitalAirQuality(city)) === 1) {
+    return "green";
+  } else if ((await getCapitalAirQuality(city)) === 2) {
+    return "yellow";
+  } else if ((await getCapitalAirQuality(city)) === 3) {
+    return "orange";
+  } else if ((await getCapitalAirQuality(city)) === 4) {
+    return "burgundy";
+  } else if ((await getCapitalAirQuality(city)) === 5) {
+    return "red";
+  }
+}

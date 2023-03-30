@@ -22,6 +22,11 @@ nav .navbar-nav .nav-link {
   height: 85vh;
   width: 100vw;
 }
+
+#map-text {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
 /* 
 #signout-btn{
   box-sizing: border-box;
