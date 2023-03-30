@@ -1,3 +1,7 @@
+
+const weatherKEY = config.Weather_API_KEY
+
+
 const weatherApp = document.querySelector(".weather-app");
 const temperature = document.querySelector(".temp");
 const dateShown = document.querySelector(".date");
@@ -67,8 +71,9 @@ function dayOfWeek(day, month, year) {
   return weekday[new Date(`${year}-${month - 1}-${day}`).getDay()];
 }
 
+
 async function fetchWeatherData() {
-  const url = `https://api.weatherapi.com/v1/current.json?key=f072ddef24d047afaae202017232803&q=${cityInput}&aqi=no`;
+  const url = `https://api.weatherapi.com/v1/current.json?key=${weatherKEY}&q=${cityInput}&aqi=no`;
   try {
     const response = await fetch(url);
     const data = await response.json();

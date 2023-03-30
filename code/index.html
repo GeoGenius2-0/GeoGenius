@@ -26,80 +26,89 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../api/config.js"></script>
-    <link rel="stylesheet" href="index.css">
-    <script src="https://kit.fontawesome.com/de2e4cc8df.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <script src="../api/config.js"></script>
-    <title>Welcome Page</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../api/config.js"></script>
+  <link rel="stylesheet" href="index.css">
+  <script src="https://kit.fontawesome.com/de2e4cc8df.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  <script src="../api/config.js"></script>
+  <title>Welcome Page</title>
 </head>
-<body>
-    <header id="header">
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
-          <div class="container">
-            <a class="navbar-brand" href="index.html"><img id="logo" src="../images/logo.png" alt="logo" srcset=""></a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-  
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <div class="mx-auto"></div>
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="map.html">Map</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="weather.html">Weather</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="news.html">News</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="air.html">Air Quality</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </header>
 
-    <section class="hidden">
-        <h1 class="center">Welcome to GeoGenius</h1>
-        <span id="typing"></span>
-        <div>
-            <button id="button1">Button 1</button>
-            <button>Button 2</button>
+<body>
+  <header id="header">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
+      <div class="container">
+        <a class="navbar-brand" href="index.html"><img id="logo" src="../images/logo.png" alt="logo" srcset=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="mx-auto"></div>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="map.html">Map</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="weather.html">Weather</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="news.html">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="air.html">Air Quality</a>
+            </li>
+          </ul>
         </div>
-    </section>
-    <!-- <section class="hidden" style="background-image: url('../images/day/sunny1.gif'); background-size: cover; padding: 10px; color: #ffffff; border: 1px solid #cccccc; border-radius: 5px;">
-        <h2>STUFF USED</h2>
-        <p>we used bbbbbbbbbbbb</p>
-      </section>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hidden">
+    <h1 class="center" style ="color: white;">Welcome to GeoGenius</h1>
+    <div>
+      <span id="typing"></span>
+      <span id="blinking-cursor"></span>
+    </div>
+    </div>
+  </section>
+
+  <section class="hidden">
+    <div class="box">
+      <h2>Mission Statement</h2>
+      <p>Our app is dedicated to improving your health and quality of life by providing real-time information on air quality levels in your area. Our mission is to empower you to make informed decisions about your daily activities by providing a simple and intuitive interface that displays air quality data in an easily understandable format. With our app, you can ensure that you are in a safe and healthy environment at all times.</p>
+    </div>
+</section>
+
+  <section class="hidden">
+    <h1>HI MOM</h1>
+    <p>This is website</p>
+</section>
+
+<section class="hidden">
+    <h2>really good</h2>
+</section>
       
-      
+<!--       
       <section class="hidden" style="background-image: url('../images/day/rain.gif'); background-size: cover; padding: 10px; color: #ffffff; border: 1px solid #cccccc; border-radius: 5px;">
         <h2>STUFF USED</h2>
         <p>we used bbbbbbbbbbbb</p>
       </section>
-       -->
+       --> 
 
-    <footer>
-        <p>&copy; 2023 Website</p>
-    </footer>
+  <footer>
+    <p>&copy; 2023 Website</p>
+  </footer>
 
-    <script src="index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -43,18 +43,19 @@ const sentences = [
   
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      console.log(entry)
       if (entry.isIntersecting) {
         entry.target.classList.add('show')
       } else {
-        entry.target.classList.add('remove')
+        entry.target.classList.remove('show')
       }
     })
+  }, {
+    // Set the threshold to 0.5 (50% of section in view)
+    threshold: 0.5
   })
   
   const hiddenElements = document.querySelectorAll('.hidden')
-  // hiddenElements.forEach((el) => observer.observe(el))
-  hiddenElements.forEach(el => console.log(observer.observe(el)));
+  hiddenElements.forEach((el) => observer.observe(el))
   
   
   
@@ -72,8 +73,8 @@ const sentences = [
           console.log('My General Position:', position);
           const long = position.coords.longitude;
           const lat = position.coords.latitude;
-          localStorage.setItem('longitude', long);
-          localStorage.setItem('latitude', lat);
+          localStorage.setItem('longitude', JSON.stringify(long));
+          localStorage.setItem('latitude', JSON.stringify(lat));
           const response = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${long}&lon=${lat}&appid=${airQualityKey}`);
           const data = await response.json();
           console.log(data)

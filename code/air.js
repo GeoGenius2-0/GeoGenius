@@ -53,7 +53,7 @@ const getCoordinates = async (location) => {
   const data = await rawData.json();
   console.log(data);
   const { lat, lng } = data.results[0].geometry;
-  locationInp.innerText = data.results[0].formatted;
+  // locationInp.innerText = data.results[0].components.county;
   latInp.value = lat;
   longInp.value = lng;
   getAirQuality(lat, lng);
@@ -71,10 +71,10 @@ const getAirQuality = async (lat, long) => {
 };
 
 const getLocation = async (lat, long) => {
-  const apiKey = "c240e3c9fb5f3a6a787a659f81ffe2f1";
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${long}&key=${apiKey}`;
   const rawData = await fetch(url).catch((err) => {});
   const data = await rawData.json();
+  console.log(data)
   const location = data.results[0].formatted;
   locationInp.value = location;
 };
