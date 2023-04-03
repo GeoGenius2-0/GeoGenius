@@ -4,7 +4,7 @@ document.addEventListener("touchmove", (e) => {}, { passive: true });
 // const airQuality_KEY = config.Air_Quality_API_KEY;
 
 const weather_KEY = "f072ddef24d047afaae202017232803";
-const airQuality_KEY = "f42bda7ce438693d1b9966abceb83f10";
+const airQuality_KEY = "9c88cb88650fcc5677e75945bcc9b120";
 
 
 const userLatitude = Number(localStorage.getItem("latitude")) || 40.6578084;
