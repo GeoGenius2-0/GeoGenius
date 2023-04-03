@@ -1,6 +1,7 @@
 const lat = localStorage.getItem("latitude");
 const lon = localStorage.getItem("longitude");
-const weatherKEY = config.Weather_API_KEY;
+// const weatherKEY = config.Weather_API_KEY;
+const weatherKEY = "f072ddef24d047afaae202017232803";
 const weatherApp = document.querySelector(".weather-app");
 const temperature = document.querySelector(".temp");
 const dateShown = document.querySelector(".date");
