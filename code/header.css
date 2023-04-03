@@ -1,0 +1,28 @@
+body {
+  background-image: linear-gradient(to right top, #000000, #120f13, #181a21, #17262d, #183232);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+nav .navbar-nav .nav-link {
+  margin-right: 2rem;
+}
+
+#logo {
+  height: 3rem;
+  width: auto;
+}
+
+#header-bkg {
+  background-color: green;
+}
+
+.nav-hover {
+  color: white;
+}
+
+.nav-hover:hover {
+  color: #00ffe1;
+  transition: all .3s ease-in-out;
+}

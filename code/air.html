@@ -16,15 +16,14 @@
       integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="header.css">
     <script src="../api/config.js"></script>
   </head>
   <body>
     <header id="header">
-      <nav class="navbar navbar-expand-lg navbar-dark p-md-3">
+      <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-          <a class="navbar-brand" href="index.html"
-            ><img id="logo" src="../images/logo.png" alt="logo" srcset=""
-          /></a>
+          <a class="navbar-brand" href="index.html"><img id="logo" src="../images/logo.png" alt="logo" srcset=""></a>
           <button
             class="navbar-toggler"
             type="button"
@@ -41,16 +40,13 @@
             <div class="mx-auto"></div>
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link text-white" href="map.html">Map</a>
+                <a class="nav-link nav-hover" href="map.html">Map</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="weather.html">Weather</a>
+                <a class="nav-link nav-hover" href="weather.html">Weather</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="news.html">News</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="air.html">Air Quality</a>
+                <a class="nav-link nav-hover" href="air.html">Air Quality</a>
               </li>
             </ul>
           </div>
@@ -63,7 +59,7 @@
         <form>
           <label for="error-msg"></label><br />
           <input
-		  style="opacity:0"
+		  style="opacity:0;display:none"
             type="number"
             name="lat"
             placeholder="Latitude"
@@ -72,7 +68,7 @@
             class="loc-input"
           />
           <input
-			style="opacity:0"
+			style="opacity:0;display:none"
             type="number"
             name="lon"
             placeholder="Longitude"
@@ -133,6 +129,11 @@
         </div>
       </div>
     </div>
+    <footer>
+      <div class="container-fluid text-white text-center py-3">
+        <p class="mb-0">© 2023 GeoGenius. All rights reserved.</p>
+      </div>
+    </footer>
     <script src="air.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"

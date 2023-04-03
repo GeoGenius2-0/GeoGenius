@@ -1,4 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap') */
 
 
 * {
@@ -8,36 +7,14 @@
     font-family: 'Roboto', sans-serif
 }
 
-body {
-    min-height: 100vh;
-    background-image: linear-gradient(to right top, #000000, #120f13, #181a21, #17262d, #183232);
-}
-
-nav .navbar-nav .nav-link {
-    margin-right: 2rem;
-}
-
-#logo {
-    height: 3rem;
-    width: auto;
-}
-
-
 i {
     padding-left: 20px;
     padding-right: 20px;
 }
 
-/* header ul li a {
-    text-decoration: none;
-    padding: 6px 20px;
-    color: green;
-    border-radius: 30%;
+.title-cont {
+    margin-top: 50px;
 }
-
-header ul li a:hover {
-    color: rgb(107, 248, 231)
-} */
 
 section {
     display: flex;
@@ -52,10 +29,11 @@ section {
     font-size: 3.75em;
     line-height: 1;
     font-weight: bold;
-    color: #204545;
+    color: #1ebbbb;
+    margin: 0 40px;
 }
 
-button {
+/* button {
     display: inline-block;
     transition: all 0.3s ease 0s;
     background-image: linear-gradient(-60deg, rgb(9, 182, 162), rgb(107, 248, 231), rgb(9, 182, 162));
@@ -79,9 +57,14 @@ button:hover {
     color-scheme: light;
     color: inherit;
     text-decoration: inherit;
+} */
+
+.typing-container {
+    height: 200px;
+    width: 800px;
+    margin: 3rem;
+    text-align: center;
 }
-
-
 #typing {
     display: inline-block;
     padding-top: 30px;
@@ -89,16 +72,18 @@ button:hover {
     padding-right: 5px;
     animation: blink-caret 0.75s step-end infinite;
     font-weight: bold;
-    color: white;
+    color: red;
     font-size: 30px;
+    text-align: center;
+
 }
 
-/* #blinking-cursor {
+#blinking-cursor {
     width: 3px;
     animation: blink-caret 1s step-end infinite;
     background-color: white;
     color: transparent;
-} */
+}
 
 .box1 {
     width: 327px;
@@ -133,6 +118,16 @@ button:hover {
     opacity: 1;
 }
 
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    color: #1A1A1A;
+    font-size: 16px;
+  }
+
 .box {
     width: 50%;
     padding: 20px;
@@ -142,7 +137,7 @@ button:hover {
     border-radius: 10px;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     .box {
       width: 90%;
       max-width: none;
@@ -156,9 +151,26 @@ button:hover {
     object-fit: cover; /* Sets the object-fit property */
     margin-left: 110px;
   }
-  
- 
-  
-  
 
-  
+
+@media (max-width: 990px) {
+    .typing-container {
+      height: 200px;
+      width: 500px;
+    }
+
+    #typing {
+        font-size: 25px;
+    }
+}
+@media (max-width: 700px) {
+    .typing-container {
+      height: 200px;
+      width: 400px;
+    }
+
+    #typing {
+        font-size: 25px;
+    }
+}
+

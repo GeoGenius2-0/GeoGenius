@@ -1,16 +1,30 @@
-const airQualityKey = config.Air_Quality_API_KEY;
-
 navigator.geolocation.watchPosition((position) => {
   localStorage.setItem("latitude", position.coords.latitude);
   localStorage.setItem("longitude", position.coords.longitude);
 });
 
+async function searchStories (input) {
+  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election ${input}&api-key=8OFA2fIkQvc7Px7NUvIrz1GEiQ0QM24v`;
+  const data = await fetch(url);
+  const parse = await data.json();
+  for (let i = 0; i < 8; i++) {
+    const splitText = parse.response.docs[i].abstract.split(" ");
+    if (splitText.length > 30 || splitText.length < 5) {
+      continue;
+    } else {
+      sentences.push(parse.response.docs[i].abstract);
+    }
+  }
+};
+
+searchStories("air quality pollution");
+searchStories("weather news")
+searchStories("climate change news")
+
 const sentences = [
-  "Unit-6 API Project",
-  "Hello, world!",
-  "Clean air FTW",
   "#BreatheQualityAir",
 ];
+
 
 let intervalId;
 const typing = document.querySelector("#typing");
@@ -31,10 +45,10 @@ function startTyping() {
             clearInterval(intervalId);
             startTyping();
           }
-        }, 50);
-      }, 3000);
+        }, 20);
+      }, 2500);
     }
-  }, 50);
+  },20);
 }
 
 startTyping();

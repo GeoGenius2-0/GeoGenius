@@ -1,17 +1,64 @@
 document.addEventListener("touchmove", (e) => {}, { passive: true });
 
-const weather_KEY = config.Weather_API_KEY;
-const airQuality_KEY = config.Air_Quality_API_KEY;
+// const weather_KEY = config.Weather_API_KEY;
+// const airQuality_KEY = config.Air_Quality_API_KEY;
 
-let userLatitude = Number(localStorage.getItem("latitude")) || 40.6578084;
-let userLongitude = Number(localStorage.getItem("longitude")) || -74.0070693;
-let userClickedLatitude, userClickedLongitude;
+const weather_KEY = "f072ddef24d047afaae202017232803";
+const airQuality_KEY = "f42bda7ce438693d1b9966abceb83f10";
+
+
+const userLatitude = Number(localStorage.getItem("latitude")) || 40.6578084;
+const userLongitude = Number(localStorage.getItem("longitude")) || -74.0070693;
 
 async function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 12,
     center: { lat: userLatitude, lng: userLongitude },
+    styles: [
+      {
+        featureType: 'poi.business',
+        stylers: [{ visibility: 'off' }]
+      },
+      {
+        featureType: 'transit',
+        elementType: 'labels.icon',
+        stylers: [{ visibility: 'off' }]
+      }
+    ]
   });
+
+  map.addListener("click", async (event) => {
+    const userClickedLat = event.latLng.lat();
+    const userClickedLng = event.latLng.lng();
+    const clickedCity = await userCurrCity(userClickedLat, userClickedLng);
+    const createCircle = new google.maps.Marker({
+      position: { lat: userClickedLat, lng: userClickedLng },
+      map: map,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: await determineAQIColor(clickedCity),
+        fillOpacity: 1,
+        strokeColor: "white",
+        strokeWeight: 2,
+        scale: 10,
+      }
+    })
+    const clickedTemp = await userCurrTemperature(userClickedLat, userClickedLng);
+    const clickedAQI = await fetchAirQuality(userClickedLat, userClickedLng);
+    const clickedInfoWindow = new google.maps.InfoWindow({
+      content: `<div id="map-text">City: ${clickedCity}<br>Temperature: ${clickedTemp}˚C <br>Air Quality Index: ${clickedAQI}</div>`,
+    });
+
+    
+    createCircle.addListener("mouseover", () => {
+      clickedInfoWindow.open(map, createCircle);
+    });
+
+    createCircle.addListener("mouseout", () => {
+      clickedInfoWindow.close();
+    })
+
+  })
 
   const userCity = await userCurrCity(userLatitude, userLongitude);
   const userTemp = await userCurrTemperature(userLatitude, userLongitude);
@@ -33,66 +80,68 @@ async function initMap() {
   const userMarker = new google.maps.Marker({
     position: { lat: userLatitude, lng: userLongitude },
     map: map,
+    content: `<div id="map-text">You are here!</div>`,
   });
 
-
-  // capitals.forEach(async (capital) => {
-  //   try {
-  //     const usCapital = await getCapitalCoordinates(capital);
-  //     const circle = new google.maps.Marker({
-  //       position: { lat: usCapital.location.lat, lng: usCapital.location.lon },
-  //       map: map,
-  //       icon: {
-  //         path: google.maps.SymbolPath.CIRCLE,
-  //         fillColor: await determineAQIColor(capital),
-  //         fillOpacity: 1,
-  //         strokeColor: "white",
-  //         strokeWeight: 2,
-  //         scale: 10,
-  //       },
-  //     });
-  //     const capitalTemperature = await getCapitalWeather(capital);
-  //     const capitalAQI = await getCapitalAirQuality(capital);
-  //     const capitalName = await getCapitalCoordinates(capital);
-  //     const infoWindow = new google.maps.InfoWindow({
-  //       content: `<div id="map-text">Capital: ${capitalName.location.name}<br>Temperature: ${capitalTemperature}˚C <br>Air Quality Index: ${capitalAQI}</div>`,
-  //     });
-
-  //     // Listen for click events on the marker instance
-  //     circle.addListener("click", () => {
-  //       infoWindow.open(map, circle);
-  //     });
-  //   } catch (error) {
-  //     console.error(
-  //       `Error fetching weather data for ${capital}: ${error.message}`
-  //     );
-  //   }
-  // });
-}
-
-// function addMarker(map, coords) {
-//   const marker = new google.maps.Marker({
-//     position: coords,
-//     map: map,
-//   });
-
-//   if (coords.iconImage) {
-//     marker.setIcon(coords.iconImage);
-//   }
-// }
-
-function createCircle(map, lat, lng, radius, color) {
-  const circle = new google.maps.Circle({
-    strokeColor: color,
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: color,
-    fillOpacity: 0.35,
-    map: map,
-    center: { lat: lat, lng: lng },
-    radius: radius,
+  const infoWindow = new google.maps.InfoWindow({
+    content: `<div id="map-text">You're here!</div>`,
   });
-  return circle;
+
+  userMarker.addListener("mouseover", () => {
+    infoWindow.open(map, userMarker);
+  });
+
+  userMarker.addListener("mouseout", () => {
+    infoWindow.close();
+  })
+
+  const data = new google.maps.InfoWindow({
+    content: `<div id="map-text">City: ${userCity}<br>Temperature: ${userTemp}˚C <br>Air Quality Index: ${userAQI}</div>`,
+  });
+  userCircle.addListener("mouseover", () => {
+    data.open(map, userCircle);
+  });
+
+  userCircle.addListener("mouseout", () => {
+    data.close();
+  })
+
+  capitals.forEach(async (capital) => {
+    try {
+      const usCapital = await getCapitalCoordinates(capital);
+      const circle = new google.maps.Marker({
+        position: { lat: usCapital.location.lat, lng: usCapital.location.lon },
+        map: map,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: await determineAQIColor(capital),
+          fillOpacity: 1,
+          strokeColor: "white",
+          strokeWeight: 2,
+          scale: 10,
+        },
+      });
+      const capitalTemperature = await getCapitalWeather(capital);
+      const capitalAQI = await getCapitalAirQuality(capital);
+      const capitalName = await getCapitalCoordinates(capital);
+      const infoWindow = new google.maps.InfoWindow({
+        content: `<div id="map-text">Capital: ${capitalName.location.name}<br>Temperature: ${capitalTemperature}˚C <br>Air Quality Index: ${capitalAQI}</div>`,
+      });
+
+      // Listen for click events on the marker instance
+      circle.addListener("mouseover", () => {
+        infoWindow.open(map, circle);
+      });
+
+      circle.addListener("mouseout", () => {
+        infoWindow.close();
+      })
+    } catch (error) {
+      console.error(
+        `Error fetching weather data for ${capital}: ${error.message}`
+      );
+    }
+  });
 }
 
 // This function returns and object of the city coordinates including the weather data
@@ -135,16 +184,18 @@ async function fetchAirQuality(lat, lng) {
   }
 }
 
+// This function takes the AQI and determines the color based on the number.
 async function determineAQIColor(city) {
-  if ((await getCapitalAirQuality(city)) === 1) {
+  const AQI = await getCapitalAirQuality(city);
+  if (AQI === 1) {
     return "green";
-  } else if ((await getCapitalAirQuality(city)) === 2) {
+  } else if (AQI === 2) {
     return "yellow";
-  } else if ((await getCapitalAirQuality(city)) === 3) {
+  } else if (AQI === 3) {
     return "orange";
-  } else if ((await getCapitalAirQuality(city)) === 4) {
+  } else if (AQI === 4) {
     return "pink";
-  } else if ((await getCapitalAirQuality(city)) === 5) {
+  } else if (AQI === 5) {
     return "red";
   }
 }
@@ -154,7 +205,7 @@ async function userCurrTemperature(lat, lng) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    return data.current.temp_c;
+    return Math.round(data.current.temp_c);
   } catch (error) {
     console.error(error);
   }
@@ -170,3 +221,4 @@ async function userCurrCity(lat, lng) {
     console.error(error);
   }
 }
+

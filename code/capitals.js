@@ -60,6 +60,7 @@ const capitals = [
   "Ouagadougou",
   "Bujumbura",
   "Phnom Penh",
+  "Nuuk",
   "Ottawa",
   "Praia",
   "Bangui",

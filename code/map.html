@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GeoGenius</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="header.css" />
     <script src="capitals.js"></script>
     <script src="../api/config.js"></script>
     <link rel="stylesheet" href="map.css" />
   </head>
     <header id="header">
-      <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
+      <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
           <a class="navbar-brand" href="index.html"><img id="logo" src="../images/logo.png" alt="logo" srcset=""></a>
           <button
@@ -30,16 +31,13 @@
             <div class="mx-auto"></div>
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link text-white" href="map.html">Map</a>
+                <a class="nav-link nav-hover" href="map.html">Map</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="weather.html">Weather</a>
+                <a class="nav-link nav-hover" href="weather.html">Weather</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="news.html">News</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="air.html">Air Quality</a>
+                <a class="nav-link nav-hover" href="air.html">Air Quality</a>
               </li>
             </ul>
           </div>
@@ -48,10 +46,42 @@
     </header>
     <main id="main">
       <div id="map"></div>
+      <div id="indicator-container">
+        <div class="title">Air Quality Index</div>
+        <div>
+          <div class="color-container green">
+            <div class="color-number">1</div>
+            <div class="color-message">(Good)</div>
+          </div>
+          <div class="color-container yellow">
+            <div class="color-number">2</div>
+            <div class="color-message">(Fair)</div>
+          </div>
+          <div class="color-container orange">
+            <div class="color-number">3</div>
+            <div class="color-message">(Moderate)</div>
+          </div>
+          <div class="color-container pink">
+            <div class="color-number">4</div>
+            <div class="color-message">(Unhealthy)</div>
+          </div>
+          <div class="color-container red">
+            <div class="color-number">5</div>
+            <div class="color-message">(Very Unhealthy)</div>
+          </div>
+        </div>  
+        </div>
+      </div>
     </main>
+    <footer>
+      <div class="container-fluid text-white text-center py-3">
+        <p class="mb-0">© 2023 GeoGenius. All rights reserved.</p>
+      </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJPE0abWkW7Bez3Nh_rzoouvDeiciGTNM&callback=initMap"
-      ></script>
+    <!-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJPE0abWkW7Bez3Nh_rzoouvDeiciGTNM&callback=initMap"
+      ></script> -->
+    <script async src="google-map.js"></script>
     <script src="map.js"></script>
   </main>
   </body>

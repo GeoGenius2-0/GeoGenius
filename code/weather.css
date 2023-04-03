@@ -11,20 +11,10 @@ body {
     box-sizing: border-box
 }
 
-#header {
-    height: 15vh;
-    background-color: transparent;
-}
 
-nav .navbar-nav .nav-link {
-    margin-right: 2rem;
+.temp:hover {
+    cursor: pointer;
 }
-
-#logo {
-    height: 3rem;
-    width: auto;
-}
-
 
 h1,
 h3 {

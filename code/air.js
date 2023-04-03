@@ -6,8 +6,11 @@ const airQualityStat = document.querySelector(".air-quality-status");
 const srchBtn = document.querySelector(".search-btn");
 // const componentsEle = document.querySelectorAll(".component-val")
 
-const appId = config.Air_Quality_API_KEY;
-const apiKey = config.Geolocation_API_KEY;
+// const appId = config.Air_Quality_API_KEY;
+// const apiKey = config.Geolocation_API_KEY;
+
+const appId = "f42bda7ce438693d1b9966abceb83f10";
+const apiKey = "61380ea7a1e94e3a834965ee9dfac99f";
 
 const getUserLocation = () => {
   const location = locationInp.value;
@@ -32,6 +35,8 @@ const getUserLocation = () => {
   }
 };
 
+
+
 const onPositionGathered = (pos) => {
   let lat = pos.coords.latitude,
     long = pos.coords.longitude;
@@ -51,7 +56,6 @@ const getCoordinates = async (location) => {
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${location}&key=${apiKey}`;
   const rawData = await fetch(url).catch((err) => {});
   const data = await rawData.json();
-  console.log(data);
   const { lat, lng } = data.results[0].geometry;
   // locationInp.innerText = data.results[0].components.county;
   latInp.value = lat;
@@ -74,7 +78,6 @@ const getLocation = async (lat, long) => {
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${long}&key=${apiKey}`;
   const rawData = await fetch(url).catch((err) => {});
   const data = await rawData.json();
-  console.log(data)
   const location = data.results[0].formatted;
   locationInp.value = location;
 };
@@ -98,10 +101,10 @@ const setValuesOfAir = (airData) => {
     airStat = "Moderate";
     color = "rgb(201, 204, 13)";
   } else if (aqi === 4) {
-    airStat = "Poor";
+    airStat = "Unhealthy";
     color = "rgb(204, 83, 13)";
   } else if (aqi === 5) {
-    airStat = "Very Poor";
+    airStat = "Very Unhealthy";
     color = "rgb(204, 13, 13)";
   } else {
     airStat = "Unknown";
@@ -130,3 +133,12 @@ srchBtn.addEventListener("click", (e) => {
   e.preventDefault();
   getUserLocation();
 });
+
+
+const showAQI = () => {
+  const userLatitude = Number(localStorage.getItem("latitude")) || 40.6578084;
+  const userLongitude = Number(localStorage.getItem("longitude")) || -74.0070693;
+  getAirQuality(userLatitude, userLongitude);
+}
+
+showAQI();

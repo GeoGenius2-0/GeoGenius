@@ -1,4 +1,4 @@
-body {
+/* body {
   background-image: linear-gradient(to right top, #000000, #120f13, #181a21, #17262d, #183232);
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -14,58 +14,112 @@ nav .navbar-nav .nav-link {
   width: auto;
 }
 
-#header {
-  height: 15vh;
+#header-bkg {
+  background-color: green;
 }
+
+.nav-hover {
+  color: white;
+}
+
+.nav-hover:hover {
+  color: #00ffe1;
+  transition: all .3s ease-in-out;
+}*/
 
 #map {
   height: 85vh;
   width: 100vw;
-}
+  margin: 0 auto;
+} 
 
 #map-text {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
-/* 
-#signout-btn{
-  box-sizing: border-box;
-  font-family: inherit;
-  cursor: pointer;
-  box-shadow: 0 0 5px #60d5c4;
-  height: 2.5rem;
-  width: 6rem;
-  border-radius: .5rem;
-  line-height: 1.5rem;
-  color: rgb(255 255 255);
-  border: none;
-  background-size: 300% 100%;
-  transition: all 0.3s ease 0s;
-  background-image: linear-gradient(-60deg, rgb(9, 182, 162), rgb(107, 248, 231), rgb(9, 182, 162));
-  background-position: 100% 0px;
-  text-decoration: none;
+
+#indicator-container {
+  position: absolute;
+  bottom: 5vh;
+  left: 0;
+  color: white;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: purple;
+  width: 250px;
+  height: 150px;
+  border-radius: 10px;
+}
+
+.color-container {
+  display: flex;
   align-items: center;
+  margin-left: 5px;
+  position: relative;
 }
 
-
-#signout-btn:hover {
-  color: black;
-  background-position: 0% 0px;
-  color-scheme: light;
-  line-height: 1.25rem;
-  text-align: center;
-  border: 0 solid #c0c1c6;
-  color: inherit;
-  text-decoration: inherit;
-}
- */
-
-.circle {
+.color-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  transform: translateY(-50%);
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background-color: blue;
-  z-index: 1;
+  border: 1px solid white;
+  margin-left: 10px;
+}
+
+.green::before {
+  background-color: green;
+}
+
+.yellow::before {
+  background-color: yellow;
+}
+
+.orange::before {
+  background-color: orange;
+}
+
+.pink::before {
+  background-color: pink;
+}
+
+.red::before {
+  background-color: red;
+}
+
+.color-number {
+  margin-left: 1.5rem;
+}
+
+.color-message {
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  #indicator-container {
+    bottom: -14vh;
+    width: 100%;
+    align-items: center;
+  }
+}
+
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1A1A1A;
+  font-size: 16px;
 }
