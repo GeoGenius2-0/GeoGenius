@@ -35,8 +35,6 @@ const getUserLocation = () => {
   }
 };
 
-
-
 const onPositionGathered = (pos) => {
   let lat = pos.coords.latitude,
     long = pos.coords.longitude;
@@ -92,19 +90,19 @@ const setValuesOfAir = (airData) => {
 
   // Set status of air quality
   if (aqi === 1) {
-    airStat = "Good";
+    airStat = `Good: No health impacts expected.`;
     color = "rgb(19, 201, 28)";
   } else if (aqi === 2) {
-    airStat = "Fair";
+    airStat = `Fair: Moderate health concern for sensitive individuals.`;
     color = "rgb(15, 134, 25)";
   } else if (aqi === 3) {
-    airStat = "Moderate";
+    airStat = `Moderate: May cause health effects for some sensitive individuals.`;
     color = "rgb(201, 204, 13)";
   } else if (aqi === 4) {
-    airStat = "Unhealthy";
+    airStat = `Unhealthy: May cause health effects for people with respiratory problems.`;
     color = "rgb(204, 83, 13)";
   } else if (aqi === 5) {
-    airStat = "Very Unhealthy";
+    airStat = `Very unhealthy: May cause serious health effects for people with respiratory problems.`;
     color = "rgb(204, 13, 13)";
   } else {
     airStat = "Unknown";
@@ -134,11 +132,11 @@ srchBtn.addEventListener("click", (e) => {
   getUserLocation();
 });
 
-
 const showAQI = () => {
   const userLatitude = Number(localStorage.getItem("latitude")) || 40.6578084;
-  const userLongitude = Number(localStorage.getItem("longitude")) || -74.0070693;
+  const userLongitude =
+    Number(localStorage.getItem("longitude")) || -74.0070693;
   getAirQuality(userLatitude, userLongitude);
-}
+};
 
 showAQI();

@@ -1,7 +1,6 @@
 const lat = localStorage.getItem("latitude");
 const lon = localStorage.getItem("longitude");
-// const weatherKEY = config.Weather_API_KEY;
-const weatherKEY = "f072ddef24d047afaae202017232803";
+const weatherKEY = config.Weather_API_KEY;
 const weatherApp = document.querySelector(".weather-app");
 const temperature = document.querySelector(".temp");
 const dateShown = document.querySelector(".date");
@@ -20,11 +19,11 @@ const citiesAsShown = document.querySelectorAll(".city");
 
 
 temperature.addEventListener('click', () => {
-  const tempValue = parseInt(temperature.innerText);
-  const isCelsius = temperature.innerText.includes('˚C');
-  const newTempValue = isCelsius ? Math.round(tempValue * 1.8 + 32) : Math.round((tempValue - 32) / 1.8);
-  const newTempUnit = isCelsius ? '˚F' : '˚C';
-  temperature.innerText = `${newTempValue}${newTempUnit}`;
+  const tempValue = parseInt(temperature.textContent);
+  const isCelsius = temperature.textContent.includes('˚F');
+  const newTempValue = isCelsius ? Math.round((tempValue - 32) / 1.80) : Math.round((tempValue * 1.8 + 32));
+  const newTempUnit = isCelsius ? '˚C' : '˚F'; 
+  temperature.textContent = `${newTempValue}${newTempUnit}`;
 });
 
 let cityInput = "NYC";
