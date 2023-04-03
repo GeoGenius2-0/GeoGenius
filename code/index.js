@@ -9,7 +9,7 @@ async function searchStories (input) {
   const parse = await data.json();
   for (let i = 0; i < 8; i++) {
     const splitText = parse.response.docs[i].abstract.split(" ");
-    if (splitText.length > 30 || splitText.length < 5) {
+    if (splitText.length > 30 || splitText.length < 8) {
       continue;
     } else {
       sentences.push(parse.response.docs[i].abstract);
